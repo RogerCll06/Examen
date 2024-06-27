@@ -1,0 +1,91 @@
+﻿@model Examen.Models.Vehiculo
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Vehiculo</h4>
+<hr />
+<div class="row">
+    <div class="offset-12">
+        <div class="card-header bg-dark">
+            <h3 class="text-white"> <strong>Crear Vehiculo</strong> </h3>
+        </div>
+        <div class="card-body">
+
+          <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="NroPlaca" class="control-label"></label>
+                <input asp-for="NroPlaca" class="form-control" placeholder="Ingresa placa porfavor " />
+                <span asp-validation-for="NroPlaca" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MarcaId" class="control-label"></label>
+                <select asp-for="MarcaId" id="cbxMarca" class="form-control" asp-items="ViewBag.MarcaId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="ModeloId" class="control-label"></label>
+                <select asp-for="ModeloId" id="cbxModelo"  class ="form-control"asp-items="ViewBag.ModeloId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Año" class="control-label"></label>
+                <input asp-for="Año" class="form-control" />
+                <span asp-validation-for="Año" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Color" class="control-label"></label>
+                <input asp-for="Color" class="form-control" />
+                <span asp-validation-for="Color" class="text-danger"></span>
+            </div>
+                <div class="form-group mt-3">
+                    <button type="submit" class="btn btn-primary d-block mx-auto">
+                        <i class="fa fa-user" aria-hidden="true"></i> Crear vehiculo
+                    </button>
+
+                </div>
+
+          </form>
+        </div>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Volver al iniciop</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+}
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        //manejar el dropdown de marca
+        $("#cbxMarca").change(function () {
+            var marcaID = $(this).val();
+            if (marcaID) {
+                //hacer una solicitud con el ajax
+                $.ajax({
+                    url: "/Vehiculoes/ObtenerModelos",
+                    type: "GET",
+                    data: { marcaID: marcaID },
+                    success: function (modelos) {
+                        //llenar el dropDown de modelo
+                        $('#cbxModelo').empty();
+                        $.each(modelos, function (i, modelo) {
+                            $('#cbxModelo').append($('<option>', {
+                                value: modelo.id,
+                                text: modelo.nombreModelo
+                            }));
+                        });
+                    }
+                })
+            }
+        })
+    })
+</script>

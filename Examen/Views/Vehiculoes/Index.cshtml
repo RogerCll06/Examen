@@ -1,0 +1,68 @@
+﻿@model IEnumerable<Examen.Models.Vehiculo>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+<div class="offset-9 col-3 mb-3">
+    <a asp-action="Create" asp-controller="Vehiculoes" class="btn btn-secondary d-block mx-auto btn-lg">
+        <i class=" fa fa-plus" aria-hidden="true"></i> nuevo Vehiculo
+    </a>
+</div>
+
+
+<table class="table table-bordered" id="tblContactos" width="100%" cellspacing="0">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NroPlaca)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Marca)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Modelo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Año)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Color)
+            </th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NroPlaca)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Marca.NombreMarca)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Modelo.NombreModelo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Año)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Color)
+            </td>
+            <td>
+                    <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.Id">
+                    <i class="fa fa-pencil" aria-hidden="true"></i>Editar
+                    </a>
+                    <a class="btn btn-secondary" asp-action="Details" asp-route-id="@item.Id">
+                        <i class="fa fa-info-circle" aria-hidden="true"></i>Detalle
+                    </a>
+                    <a class="btn btn-danger" asp-action=" Delete" asp-route-id="@item.Id">
+                        <i class="fa fa-trash" aria-hidden="true"></i>Eliminar
+                    </a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Examen.Models.Modelo>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<div class="offset-9 col-3 mb-3">
+    <a asp-action="Create" asp-controller="Modeloes" class="btn btn-secondary d-block mx-auto btn-lg">
+        <i class=" fa fa-plus" aria-hidden="true"></i> Crear nuevo Modelo
+    </a>
+</div>
+
+<div class="row">
+    <div class="offset-12">
+        <div class="card-header bg-dark">
+            <h3 class="text-white"><strong>Lista de modelos</strong> </h3>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="tblContactos" width="100%" cellspacing="0" ">
+                    <thead>
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.NombreModelo)</th>
+                            <th>@Html.DisplayNameFor(model => model.Marca)</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model) 
+                        {
+                           <tr> 
+                               <td> @Html.DisplayFor(modelItem => item.NombreModelo)</td>
+                               <td>@Html.DisplayFor(modelItem => item.Marca.NombreMarca)</td>
+                               <td>
+                                   <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.Id">
+                                        <i class="fa fa-pencil" aria-hidden="true"></i>Editar
+                                   </a>
+                                   <a class="btn btn-secondary" asp-action="Details" asp-route-id="@item.Id">
+                                        <i class="fa fa-info-circle" aria-hidden="true"></i>Detalle
+                                   </a>
+                                   <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">
+                                        <i class="fa fa-trash" aria-hidden="true"></i>Eliminar
+                                   </a>
+                               </td>
+                           </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,65 @@
+﻿@model IEnumerable<Examen.Models.Vehiculo>
+@{
+    ViewData["Title"] = "lista";
+}
+
+<h1>lista</h1>
+<p>
+    <a asp-action="Crear">Create New</a>
+</p>
+<div class="row">
+    <div class="offset-12">
+        <div class="card-header bg-dark">
+            <h3 class="text-white"><strong>Lista de Vehiculos</strong></h3>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                @if (Model.Count() > 0)
+                {
+                    <table class="table table-bordered" id="tblVehiculos" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>@Html.DisplayNameFor(m => m.Id)</th>
+                                <th>@Html.DisplayNameFor(m => m.NroPlaca)</th>
+                                <th>@Html.DisplayNameFor(m => m.MarcaId)</th>
+                                <th>@Html.DisplayNameFor(m => m.ModeloId)</th>
+                                <th>@Html.DisplayNameFor(m => m.Año)</th>
+                                <th>@Html.DisplayNameFor(m => m.Color)</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@Html.DisplayFor(m => item.Id)</td>
+                                    <td>@Html.DisplayFor(m => item.NroPlaca)</td>
+                                    <td>@Html.DisplayFor(m => item.MarcaId)</td>
+                                    <td>@Html.DisplayFor(m => item.Modelo)</td>
+                                    <td>@Html.DisplayFor(m => item.Año)</td>
+                                    <td>@Html.DisplayFor(m => item.Color)</td>
+                                    <td>
+                                        <a class="btn btn-warning" asp-action="Editar" asp-route-id="@item.Id">
+                                            <i class="fa fa-pencil" aria-hidden="true"></i>Editar
+                                        </a>
+                                        <a class="btn btn-secondary" asp-action="Detalle" asp-route-id="@item.Id">
+                                            <i class="fa fa-info-circle" aria-hidden="true"></i>Detalle
+                                        </a>
+                                        <a class="btn btn-danger" asp-action="Eliminar" asp-route-id="@item.Id">
+                                            <i class="fa fa-trash" aria-hidden="true"></i>Eliminar
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <p>No hay contactos disponibles.</p>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
